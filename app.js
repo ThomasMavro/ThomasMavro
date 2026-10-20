@@ -94,7 +94,9 @@
   // ---------- rendering ----------
   const tx = v => (v && typeof v === "object" && "en" in v) ? v[L] : v;
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const linksHTML = () => `<ul class="links">${CV.links.map(l => `<li><a href="${l.href}" target="_blank" rel="noopener" data-track="${l.k}">${esc(l.label)}</a></li>`).join("")}</ul>`;
+  const linksHTML = () => `<ul class="links">${CV.links.map(l => l.soon
+    ? `<li class="soon">${esc(l.label)} (${esc(tx(CV.soon))})</li>`
+    : `<li><a href="${l.href}" target="_blank" rel="noopener" data-track="${l.k}">${esc(l.label)}</a></li>`).join("")}</ul>`;
   const chipsHTML = s => s.chips.map(row => `<ul class="chips">${row.map(c => `<li>${esc(tx(c))}</li>`).join("")}</ul>`).join("");
   const bodyHTML = it => (it.b ? `<ul class="bul">${it.b.map(x => `<li>${esc(tx(x))}</li>`).join("")}</ul>` : "")
     + (it.p ? `<p style="margin:6px 0 0">${esc(tx(it.p))}</p>` : "")
@@ -104,11 +106,11 @@
   function render() {
     const nav = `<nav aria-label="Sections"><ol>${CV.sections.map((s, i) => `<li><a href="#${s.id}" data-nav="${s.id}" style="--c:var(${s.c})" class="${i === 0 ? "on" : ""}">${esc(tx(s.h))}</a></li>`).join("")}</ol></nav>`;
     const sec = s => `<section id="${s.id}" data-section="${s.id}"><h2>${esc(tx(s.h))}</h2>${
-      s.text ? `<p style="margin:0">${esc(tx(s.id === "profile" && summary ? summary : s.text))}</p>` :
+      s.paras ? (s.id === "profile" && summary ? [summary] : s.paras).map(x => `<p class="para">${esc(tx(x))}</p>`).join("") :
       s.chips ? chipsHTML(s) :
-      s.items.map(it => `<div class="item"><div class="it">${esc(tx(it.t))}</div><div class="meta">${esc(tx(it.o))} · ${esc(tx(it.d))}</div>${bodyHTML(it)}</div>`).join("")}</section>`;
+      s.items.map(it => `<div class="item"><div class="head"><div><div class="it">${esc(tx(it.t))}</div><div class="meta">${esc(tx(it.o))}</div></div><div class="date">${esc(tx(it.d))}</div></div>${bodyHTML(it)}</div>`).join("")}</section>`;
     document.getElementById("app").innerHTML =
-      `<div class="layout"><aside><div class="side"><h1>${CV.name}</h1><p class="tag">${esc(tx(CV.tag))}<br>${esc(tx(CV.place))}</p><div class="rings-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>${linksHTML()}${nav}</div></aside><main>${CV.sections.map(sec).join("")}</main></div>`;
+      `<div class="layout"><aside><div class="side"><h1>${CV.name}</h1><p class="tag">${CV.tagLines.map(x => esc(tx(x))).join("<br>")}</p><div class="rings-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>${linksHTML()}${nav}</div></aside><main>${CV.sections.map(sec).join("")}</main></div>`;
     document.getElementById("foot-note").textContent = tx(FOOT);
     document.documentElement.lang = L;
     document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === L));

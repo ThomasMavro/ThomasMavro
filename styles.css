@@ -32,7 +32,12 @@ nav a{display:flex;align-items:center;gap:10px;color:var(--muted);text-decoratio
 nav a::before{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--c,var(--o-blue));flex:none}
 nav a.on{color:var(--ink);font-weight:600}
 nav a.on::before{background:var(--c,var(--o-blue))}
-main{padding:44px max(16px,clamp(24px,5vw,64px)) 24px;max-width:780px;min-width:0}
+main{padding:44px max(16px,clamp(24px,5vw,64px)) 24px;width:100%;max-width:900px;margin:0 auto;min-width:0}
+.para{margin:0 0 12px}
+.para:last-child{margin-bottom:0}
+.links .soon{color:var(--muted);opacity:.7}
+.item .head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:start}
+.item .date{color:var(--muted);font-size:14px;white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums;padding-top:2px}
 section{padding-bottom:36px;margin-bottom:36px;border-bottom:1px solid var(--line);scroll-margin-top:20px}
 section:last-child{border-bottom:0}
 h2{font:500 28px/1.2 "Newsreader",Georgia,serif;margin:0 0 18px}
@@ -49,5 +54,7 @@ h2{font:500 28px/1.2 "Newsreader",Georgia,serif;margin:0 0 18px}
   .side{position:static;padding:32px 16px 20px}
   nav{display:none}
   main{padding:32px 16px 24px}
+  .item .head{grid-template-columns:1fr}
+  .item .date{text-align:left;padding-top:0}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
