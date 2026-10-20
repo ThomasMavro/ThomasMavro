@@ -9,7 +9,7 @@ const CV = {
     T("Loughborough University London", "Loughborough University London"),
     T("London-based", "Basé à Londres")
   ],
-  availability: T("Open to part-time roles now · full-time from June 2027", "Disponible à temps partiel dès maintenant · à temps plein à partir de juin 2027"),
+  availability: T("Open to Part-time roles now · Full-time from June 2027", "Disponible à temps partiel dès maintenant · à temps plein à partir de juin 2027"),
   links: [
     { k: "email", label: "tom_mavro@hotmail.com", href: "mailto:tom_mavro@hotmail.com" },
     { k: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/thomasmavrogonatos/" },
