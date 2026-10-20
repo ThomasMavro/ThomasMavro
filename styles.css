@@ -26,7 +26,8 @@ ul.bul li{margin:4px 0}
 aside{background:var(--wash);border-right:1px solid var(--line)}
 .side{position:sticky;top:0;padding:44px 28px}
 h1{font:500 34px/1.1 "Newsreader",Georgia,serif;margin:0 0 8px;letter-spacing:-.01em}
-.tag{color:var(--muted);font-size:14px;margin:0 0 20px}
+.tag{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:7px;color:var(--muted);font-size:14px;line-height:1.35}
+.tag li:first-child{color:var(--ink);font-weight:600;font-size:15px}
 nav ol{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:14px}
 nav a{display:flex;align-items:center;gap:10px;color:var(--muted);text-decoration:none;padding:4px 0}
 nav a::before{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--c,var(--o-blue));flex:none}

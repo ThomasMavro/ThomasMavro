@@ -110,7 +110,7 @@
       s.chips ? chipsHTML(s) :
       s.items.map(it => `<div class="item"><div class="head"><div><div class="it">${esc(tx(it.t))}</div><div class="meta">${esc(tx(it.o))}</div></div><div class="date">${esc(tx(it.d))}</div></div>${bodyHTML(it)}</div>`).join("")}</section>`;
     document.getElementById("app").innerHTML =
-      `<div class="layout"><aside><div class="side"><h1>${CV.name}</h1><p class="tag">${CV.tagLines.map(x => esc(tx(x))).join("<br>")}</p><div class="rings-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>${linksHTML()}${nav}</div></aside><main>${CV.sections.map(sec).join("")}</main></div>`;
+      `<div class="layout"><aside><div class="side"><h1>${CV.name}</h1><ul class="tag">${CV.tagLines.map(x => `<li>${esc(tx(x))}</li>`).join("")}</ul><div class="rings-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>${linksHTML()}${nav}</div></aside><main>${CV.sections.map(sec).join("")}</main></div>`;
     document.getElementById("foot-note").textContent = tx(FOOT);
     document.documentElement.lang = L;
     document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === L));

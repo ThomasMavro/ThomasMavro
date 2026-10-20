@@ -5,8 +5,8 @@ const CV = {
   name: "Thomas Mavrogonatos",
   tagLines: [
     T("Sport Analytics and Strategy", "Analyse sportive et stratégie"),
-    T("MSc Sport Analytics and Artificial Intelligence at Loughborough University London",
-      "MSc Sport Analytics and Artificial Intelligence à Loughborough University London"),
+    T("MSc Sport Analytics and Artificial Intelligence", "MSc Sport Analytics and Artificial Intelligence"),
+    T("Loughborough University London", "Loughborough University London"),
     T("London-based", "Basé à Londres")
   ],
   links: [
