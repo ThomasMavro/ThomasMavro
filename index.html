@@ -10,6 +10,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Public+Sans:wght@400;600&display=swap">
 <link rel="stylesheet" href="styles.css">
 <!-- Analytics: cookie-free Umami. -->
+<script>
+  // Visiting with ?me=1 marks this browser as Thomas's own (?me=0 undoes it), so his visits are not counted.
+  try { const m = new URLSearchParams(location.search).get("me");
+    if (m === "1") localStorage.setItem("umami.disabled", "1");
+    if (m === "0") localStorage.removeItem("umami.disabled"); } catch (e) {}
+</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="fae4f61d-826f-49c5-819a-51157120361e" data-auto-track="false"></script>
 </head>
 <body>
