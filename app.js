@@ -15,13 +15,14 @@
     try { let v = sessionStorage.getItem("cv_visit"); if (!v) { v = Math.random().toString(36).slice(2, 12); sessionStorage.setItem("cv_visit", v); } return v; }
     catch (e) { return Math.random().toString(36).slice(2, 12); }
   })();
+  const TZ = (() => { try { return (Intl.DateTimeFormat().resolvedOptions().timeZone || "").slice(0, 64) || null; } catch (e) { return null; } })();
   const DEVICE = matchMedia("(max-width: 820px)").matches ? "mobile" : "desktop";
   const REFERRER = (() => { try { return document.referrer ? new URL(document.referrer).hostname.slice(0, 200) : null; } catch (e) { return null; } })();
   function store(name, data) {
     if (optedOut || SUPABASE_URL.indexOf("https://") !== 0) return;
     const row = { visit: VISIT, app: APP, lang: L, name, section: data.section || null,
       value: data.seconds != null ? data.seconds : (data.depth != null ? data.depth : null),
-      target: data.target || data.to || null, referrer: REFERRER, device: DEVICE };
+      target: data.target || data.to || null, referrer: REFERRER, device: DEVICE, tz: TZ };
     try {
       fetch(`${SUPABASE_URL}/rest/v1/cv_events`, { method: "POST", keepalive: true,
         headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
