@@ -97,10 +97,14 @@
   const linksHTML = () => `<ul class="links">${CV.links.map(l => l.soon
     ? `<li class="soon">${esc(l.label)} (${esc(tx(CV.soon))})</li>`
     : `<li><a href="${l.href}" target="_blank" rel="noopener" data-track="${l.k}">${esc(l.label)}</a></li>`).join("")}</ul>`;
-  const chipsHTML = s => s.chips.map(row => `<ul class="chips">${row.map(c => `<li>${esc(tx(c))}</li>`).join("")}</ul>`).join("");
-  const bodyHTML = it => (it.b ? `<ul class="bul">${it.b.map(x => `<li>${esc(tx(x))}</li>`).join("")}</ul>` : "")
+  const chipsHTML = s => s.chips.map(row => Array.isArray(row)
+    ? `<ul class="chips">${row.map(c => `<li>${esc(tx(c))}</li>`).join("")}</ul>`
+    : `<div class="chip-row"><span class="chip-label">${esc(tx(row.label))}</span><ul class="chips">${row.items.map(c => `<li>${esc(tx(c))}</li>`).join("")}</ul></div>`).join("");
+  const bodyHTML = it => (it.sub ? `<div class="sub">${esc(tx(it.sub))}</div>` : "") + (it.b ? `<ul class="bul">${it.b.map(x => `<li>${esc(tx(x))}</li>`).join("")}</ul>` : "")
     + (it.p ? `<p style="margin:6px 0 0">${esc(tx(it.p))}</p>` : "")
     + (it.cta ? `<p style="margin:12px 0 0"><a class="btn" href="${it.href}" target="_blank" rel="noopener" data-track="thesis_pdf">${esc(tx(it.cta))}</a></p>` : "");
+
+  const itemsHTML = items => items.map(it => `<div class="item"><div class="head"><div><div class="it">${esc(tx(it.t))}</div><div class="meta">${esc(tx(it.o))}</div></div><div class="date">${esc(tx(it.d))}</div></div>${bodyHTML(it)}</div>`).join("");
 
   let observer, spy;
   function render() {
@@ -108,9 +112,10 @@
     const sec = s => `<section id="${s.id}" data-section="${s.id}"><h2>${esc(tx(s.h))}</h2>${
       s.paras ? (s.id === "profile" && summary ? [summary] : s.paras).map(x => `<p class="para">${esc(tx(x))}</p>`).join("") :
       s.chips ? chipsHTML(s) :
-      s.items.map(it => `<div class="item"><div class="head"><div><div class="it">${esc(tx(it.t))}</div><div class="meta">${esc(tx(it.o))}</div></div><div class="date">${esc(tx(it.d))}</div></div>${bodyHTML(it)}</div>`).join("")}</section>`;
+      s.groups ? s.groups.map(g => `<h3>${esc(tx(g.h))}</h3>${itemsHTML(g.items)}`).join("") :
+      itemsHTML(s.items)}</section>`;
     document.getElementById("app").innerHTML =
-      `<div class="layout"><aside><div class="side"><h1>${CV.name}</h1><ul class="tag">${CV.tagLines.map(x => `<li>${esc(tx(x))}</li>`).join("")}</ul><div class="rings-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>${linksHTML()}${nav}</div></aside><main>${CV.sections.map(sec).join("")}</main></div>`;
+      `<div class="layout"><aside><div class="side"><h1>${CV.name}</h1><ul class="tag">${CV.tagLines.map(x => `<li>${esc(tx(x))}</li>`).join("")}</ul><div class="rings-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>${CV.availability ? `<p class="avail">${esc(tx(CV.availability))}</p>` : ""}${linksHTML()}${nav}</div></aside><main>${CV.sections.map(sec).join("")}</main></div>`;
     document.getElementById("foot-note").textContent = tx(FOOT);
     document.documentElement.lang = L;
     document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === L));
