@@ -43,7 +43,7 @@ const CV = {
     ]},
     { id: "education", c: "--o-blue", h: T("Education", "Formation"), items: [
       { t: T("MSc Sport Analytics and Artificial Intelligence", "MSc Sport Analytics and Artificial Intelligence"), o: "Loughborough University London", d: T("2026 – 2027", "2026 – 2027") },
-      { t: T("Postgraduate Programme in Sport Management", "Programme post-universitaire en management du sport"), o: T("Belgian Olympic Committee", "Comité Olympique Belge"), d: T("2025 – 2026", "2025 – 2026") },
+      { t: T("Postgraduate Programme in Sport Management", "Programme post-universitaire en management du sport"), o: T("Belgian Olympic Academy, Belgian Olympic Committee", "Académie Olympique de Belgique, Comité Olympique Belge"), d: T("2025 – 2026", "2025 – 2026") },
       { t: T("MSc International Management", "MSc International Management"), o: "ESADE Business School", d: T("2020 – 2021", "2020 – 2021") },
       { t: T("BSc Economics", "Bachelier en sciences économiques"), o: "Solvay Brussels School of Economics and Management", d: T("2017 – 2020", "2017 – 2020") }
     ]},
@@ -64,7 +64,7 @@ const CV = {
       ]}
     ]},
     { id: "research", c: "--o-yellow", h: T("Research", "Recherche"), items: [
-      { t: T("“E-Sports beyond simulation”", "« E-Sports beyond simulation »"), o: T("Final work, Postgraduate Programme in Sport Management, Belgian Olympic Committee", "Travail de fin d'études, programme post-universitaire en management du sport, Comité Olympique Belge"), d: T("Dec 2025", "déc. 2025"), p: T(
+      { t: T("“E-Sports beyond simulation”", "« E-Sports beyond simulation »"), o: T("Final work, Belgian Olympic Academy (Postgraduate Programme in Sport Management), Belgian Olympic Committee", "Travail de fin d'études, Académie Olympique de Belgique (programme post-universitaire en management du sport), Comité Olympique Belge"), d: T("Dec 2025", "déc. 2025"), p: T(
         "Examined how the IOC's engagement with e-sports is redefining “sport” and what it means for Belgium. Drawing on stakeholder interviews and cases from South Korea, Finland, Sweden and France, it recommends integrating sport-simulation titles into existing Belgian federations as a first step towards embedding e-sports in the Olympic movement.",
         "Analyse de la manière dont l'engagement du CIO envers l'e-sport redéfinit la notion de « sport », et de ses implications pour la Belgique. À partir d'entretiens et de cas en Corée du Sud, Finlande, Suède et France, le travail recommande d'intégrer d'abord les jeux de simulation sportive dans les fédérations belges existantes, comme première étape vers l'intégration de l'e-sport dans le mouvement olympique."),
         cta: T("Read the thesis (PDF)", "Lire le travail (PDF)"), href: "thesis.pdf" }
