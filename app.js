@@ -7,12 +7,36 @@
   let summary = null; // tailored summary for this application, if any
 
   // ---------- analytics ----------
+  // Events go to Umami (charts) and to Thomas's own Supabase table (feeds the "CV insights" dashboard tab).
+  const SUPABASE_URL = "https://zkojexxsticwrmyggias.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_Fv9L2-KAEyiLwdKiRyn1dg_e7gB10SS";  // public anon / publishable key: it can only add events
+  const optedOut = (() => { try { return localStorage.getItem("umami.disabled") === "1"; } catch (e) { return false; } })();
+  const VISIT = (() => {
+    try { let v = sessionStorage.getItem("cv_visit"); if (!v) { v = Math.random().toString(36).slice(2, 12); sessionStorage.setItem("cv_visit", v); } return v; }
+    catch (e) { return Math.random().toString(36).slice(2, 12); }
+  })();
+  const DEVICE = matchMedia("(max-width: 820px)").matches ? "mobile" : "desktop";
+  const REFERRER = (() => { try { return document.referrer ? new URL(document.referrer).hostname.slice(0, 200) : null; } catch (e) { return null; } })();
+  function store(name, data) {
+    if (optedOut || SUPABASE_URL.indexOf("https://") !== 0) return;
+    const row = { visit: VISIT, app: APP, lang: L, name, section: data.section || null,
+      value: data.seconds != null ? data.seconds : (data.depth != null ? data.depth : null),
+      target: data.target || data.to || null, referrer: REFERRER, device: DEVICE };
+    try {
+      fetch(`${SUPABASE_URL}/rest/v1/cv_events`, { method: "POST", keepalive: true,
+        headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify(row) }).catch(() => {});
+    } catch (e) {}
+  }
   const queue = [];
   function send(name, data) {
-    const payload = Object.assign({ a: APP, lang: L }, data || {});
+    data = data || {};
+    store(name, data);
+    const payload = Object.assign({ a: APP, lang: L }, data);
     if (window.umami && typeof window.umami.track === "function") window.umami.track(name, payload);
     else queue.push([name, payload]);
   }
+  store("page_view", {});
   const flush = setInterval(() => {
     if (window.umami && typeof window.umami.track === "function") {
       window.umami.track(); // page view
