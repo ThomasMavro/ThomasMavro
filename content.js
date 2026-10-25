@@ -72,6 +72,13 @@ const CV = {
         "Analyse de la manière dont l'engagement du CIO envers l'e-sport redéfinit la notion de « sport », et de ses implications pour la Belgique. À partir d'entretiens et de cas en Corée du Sud, Finlande, Suède et France, le travail recommande d'intégrer d'abord les jeux de simulation sportive dans les fédérations belges existantes, comme première étape vers l'intégration de l'e-sport dans le mouvement olympique."),
         cta: T("Read the thesis (PDF)", "Lire le travail (PDF)"), href: "thesis.pdf" }
     ]},
+    { id: "projects", c: "--o-green", h: T("Projects", "Projets"), items: [
+      { t: T("400m Race Lab (TrackLab)", "400m Race Lab (TrackLab)"), o: T("Personal project, MSc Sport Analytics and AI", "Projet personnel, MSc Sport Analytics and AI"), d: T("Oct 2026", "oct. 2026"), p: T(
+        "A 3D 400 m race simulator for athletes and coaches. You build an athlete from body, physiology and race plan, race them against 222 Olympic and World Championship performances or your own GPS and timing-gate runs, and get a report ranking what to train for the biggest time gain. Fitted profiles reproduce every real race within 0.08 s at each split. Built in JavaScript with a physics-based energy model.",
+        "Un simulateur 3D du 400 m pour athlètes et entraîneurs. On construit un athlète (morphologie, physiologie, plan de course), on le fait courir contre 222 performances olympiques et de championnats du monde ou contre ses propres courses (GPS, cellules de chronométrage), et un rapport classe les axes d'entraînement selon le temps à gagner. Les profils ajustés reproduisent chaque course réelle à 0,08 s près à chaque passage. Développé en JavaScript avec un modèle énergétique fondé sur la physique."),
+        cta: T("Open the tool", "Ouvrir l'outil"), href: "https://thomasmavro.github.io/TrackLab/", track: "tracklab",
+        cta2: T("Code on GitHub", "Code sur GitHub"), href2: "https://github.com/ThomasMavro/TrackLab", track2: "tracklab_code" }
+    ]},
     { id: "skills", c: "--o-black", h: T("Skills", "Compétences"), chips: [
       { label: T("Data & business tools", "Données & outils"), items: ["Python", "SQL", "Power BI", "Salesforce"] },
       { label: T("Office", "Bureautique"), items: ["Microsoft 365 (Excel, Word, PowerPoint, Outlook, Teams)"] }

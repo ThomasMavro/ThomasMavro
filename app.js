@@ -103,7 +103,8 @@
     : `<div class="chip-row"><span class="chip-label">${esc(tx(row.label))}</span><ul class="chips">${row.items.map(c => `<li>${esc(tx(c))}</li>`).join("")}</ul></div>`).join("");
   const bodyHTML = it => (it.sub ? `<div class="sub">${esc(tx(it.sub))}</div>` : "") + (it.b ? `<ul class="bul">${it.b.map(x => `<li>${esc(tx(x))}</li>`).join("")}</ul>` : "")
     + (it.p ? `<p style="margin:6px 0 0">${esc(tx(it.p))}</p>` : "")
-    + (it.cta ? `<p style="margin:12px 0 0"><a class="btn" href="${it.href}" target="_blank" rel="noopener" data-track="thesis_pdf">${esc(tx(it.cta))}</a></p>` : "");
+    + (it.cta ? `<p style="margin:12px 0 0"><a class="btn" href="${it.href}" target="_blank" rel="noopener" data-track="${it.track || "thesis_pdf"}">${esc(tx(it.cta))}</a>`
+      + (it.cta2 ? ` <a class="btn" href="${it.href2}" target="_blank" rel="noopener" data-track="${it.track2}">${esc(tx(it.cta2))}</a>` : "") + `</p>` : "");
 
   const itemsHTML = items => items.map(it => `<div class="item"><div class="head"><div><div class="it">${esc(tx(it.t))}</div><div class="meta">${esc(tx(it.o))}</div></div><div class="date">${esc(tx(it.d))}</div></div>${bodyHTML(it)}</div>`).join("");
 
