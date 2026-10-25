@@ -13,8 +13,8 @@ const CV = {
   links: [
     { k: "email", label: "tom_mavro@hotmail.com", href: "mailto:tom_mavro@hotmail.com" },
     { k: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/thomasmavrogonatos/" },
-    { k: "github", label: "GitHub", soon: true },
-    { k: "substack", label: "Substack", soon: true }
+    { k: "github", label: "GitHub", href: "https://github.com/ThomasMavro" },
+    { k: "substack", label: "Substack", href: "https://substack.com/@thomasmavrogonatos" }
   ],
   soon: T("coming soon", "bientôt disponible"),
   sections: [
