@@ -103,6 +103,7 @@
     : `<div class="chip-row"><span class="chip-label">${esc(tx(row.label))}</span><ul class="chips">${row.items.map(c => `<li>${esc(tx(c))}</li>`).join("")}</ul></div>`).join("");
   const bodyHTML = it => (it.sub ? `<div class="sub">${esc(tx(it.sub))}</div>` : "") + (it.b ? `<ul class="bul">${it.b.map(x => `<li>${esc(tx(x))}</li>`).join("")}</ul>` : "")
     + (it.p ? `<p style="margin:6px 0 0">${esc(tx(it.p))}</p>` : "")
+    + (it.img ? `<a class="shot" href="${it.href || it.img}" target="_blank" rel="noopener" data-track="${it.track ? it.track + "_img" : "img"}"><img src="${it.img}" alt="${esc(tx(it.alt || ""))}" loading="lazy" width="960" height="600"></a>` : "")
     + (it.cta ? `<p style="margin:12px 0 0"><a class="btn" href="${it.href}" target="_blank" rel="noopener" data-track="${it.track || "thesis_pdf"}">${esc(tx(it.cta))}</a>`
       + (it.cta2 ? ` <a class="btn" href="${it.href2}" target="_blank" rel="noopener" data-track="${it.track2}">${esc(tx(it.cta2))}</a>` : "") + `</p>` : "");
 

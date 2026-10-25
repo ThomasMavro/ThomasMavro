@@ -66,3 +66,6 @@ h2{font:500 28px/1.2 "Newsreader",Georgia,serif;margin:0 0 18px}
   .item .date{text-align:left;padding-top:0}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.shot { display: block; margin: 10px 0 0; max-width: 420px; }
+.shot img { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid rgba(0,0,0,.12); }
