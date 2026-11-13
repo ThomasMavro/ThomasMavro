@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Redirecting</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;margin:0;padding:40px 16px;color:#222;background:#fff}a{color:#0b5fa5}</style>
+</head>
+<body>
+<p id="msg">Opening the link…</p>
+<script>
+// Tracked links used in Thomas's CV (PDF). go/?l=<key>[&a=<application code>]
+// Logs one "link_click" (target "pdf:<key>") to Supabase, then redirects. No IP or cookie is stored.
+// Only the keys below can be used, so this page cannot redirect anywhere else.
+(function () {
+  var LINKS = {
+    site: "../",
+    linkedin: "https://www.linkedin.com/in/thomasmavrogonatos/",
+    github: "https://github.com/ThomasMavro",
+    substack: "https://substack.com/@thomasmavrogonatos",
+    fpl: "https://fpl-data-engine.vercel.app/",
+    tracklab: "https://thomasmavro.github.io/TrackLab/",
+    articles: "https://wearethenews.com/user/479",
+    dissertation: "https://www.linkedin.com/in/thomasmavrogonatos/overlay/1789198482906/single-media-viewer/?profileId=ACoAACgf5yoBKoENck3h-pTBW4cCQPxOr_tAdQw"
+  };
+  var p = new URLSearchParams(location.search);
+  var key = (p.get("l") || "").toLowerCase();
+  var app = (p.get("a") || "general").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40) || "general";
+  var dest = LINKS[key] || "../";
+  if (key === "site" && app !== "general") dest = "../?a=" + encodeURIComponent(app);
+  var done = false;
+  function go() { if (!done) { done = true; location.replace(dest); } }
+  var msg = document.getElementById("msg");
+  msg.innerHTML = 'Opening the link… <a href="' + dest.replace(/"/g, "&quot;") + '">Continue</a>';
+  var me = false; try { me = localStorage.getItem("umami.disabled") === "1"; } catch (e) {}
+  if (me || !LINKS[key]) return go();
+  var tz = null; try { tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || "").slice(0, 64) || null; } catch (e) {}
+  var row = { visit: Math.random().toString(36).slice(2, 12), app: app, lang: "en", name: "link_click", target: "pdf:" + key,
+    referrer: null, device: matchMedia("(max-width: 820px)").matches ? "mobile" : "desktop", tz: tz };
+  try {
+    fetch("https://zkojexxsticwrmyggias.supabase.co/rest/v1/cv_events", { method: "POST", keepalive: true,
+      headers: { apikey: "sb_publishable_Fv9L2-KAEyiLwdKiRyn1dg_e7gB10SS", "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify(row) }).then(go, go);
+  } catch (e) { go(); }
+  setTimeout(go, 800);
+})();
+</script>
+</body>
+</html>
